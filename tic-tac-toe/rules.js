@@ -88,7 +88,42 @@ The method should do all the validations as stated in rule 1.
 */
 
 function begin_play(){
+	// Handle multiple clicks on begin play.
+	if(game_started())
+	{
+		alert("Already started. Please Reset Play to start again.");
+		return;
+	}
+	var player1 = document.getElementById("player1_id");
+	var player2 = document.getElementById("player2_id");
+	if (!player1.value || !player2.value)
+	{
+		// A player name is empty
+		alert("Name fields cannot be empty!");
+		return;
+	}
+	else
+	{
+		// disable the name fields
+		player1.disabled = true;
+		player2.disabled = true;
 
+		// update the player moves as shown in the image.
+		player1.value += " (X)"
+		player2.value += " (O)"
+
+		// update the turn information on the page.
+		if(turn)
+		{
+			document.getElementById("turn_info").innerHTML = "Turn for : " + "X".bold();
+		}
+		else{
+			document.getElementById("turn_info").innerHTML = "Turn for : " + "O".bold();
+		}
+
+		// set the started flag to true.
+		this.started = true;
+	}
 }
 
 /*
@@ -103,7 +138,32 @@ Remember to set the strated flag as false
 
 */
 function reset_play(){
+	// All the three text boxes should be cleared
+	document.getElementById("player1_id").value = "";
+	document.getElementById("player2_id").value = "";
+	document.getElementById("move_text_id").value = "";
 
+	// Turn should be set to the default message.
+	document.getElementById("turn_info").innerHTML = "Game has not begin.";
+
+	// The text boxes for entering name should be enablled back.
+	document.getElementById("player1_id").disabled = false;
+	document.getElementById("player2_id").disabled = false;
+
+	// The Tic Tac Toe Grid should be set to its default entries.
+	document.getElementById("A1").innerHTML = "A1";
+	document.getElementById("A2").innerHTML = "A2";
+	document.getElementById("A3").innerHTML = "A3";
+
+	document.getElementById("B1").innerHTML = "B1";
+	document.getElementById("B2").innerHTML = "B2";
+	document.getElementById("B3").innerHTML = "B3";
+
+	document.getElementById("C1").innerHTML = "C1";
+	document.getElementById("C2").innerHTML = "C2";
+	document.getElementById("C3").innerHTML = "C3";
+
+	this.turn = 1;
 }
 
 /*
@@ -123,7 +183,72 @@ The method should do all the things as stated in rule 2.
 
 */
 function play() {
-	
+	if(!game_started())
+	{
+		//  If the game has not started, clicking on <b>Play</b> should give an alert "The game has not started."<br/>
+		alert("The game has not started.");
+		return;
+	}
+	var position = document.getElementById("move_text_id").value;
+	// The moves should be validated can only be these ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
+	if(["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"].indexOf(position) < 0)
+	{
+		// Invalid moves should be reported by an alert message.
+		alert("Invalid position");
+		return;
+	}
+	if(document.getElementById(position).innerHTML != position)
+	{
+		// A move should always be a valid move.
+		alert("Position already occupied");
+		return;
+	}
+	var state_position = (position[0].charCodeAt(0)-65)*3 + position[1] - 1;
+	// If the move is a valid move, the grid should be updated with the correct move
+	if(whose_move())
+	{
+		document.getElementById(position).innerHTML = "X";
+		this.board_state[state_position]= 1;
+		document.getElementById("turn_info").innerHTML = "Turn for : " + "O".bold();
+	}
+	else{
+		document.getElementById(position).innerHTML = "O";
+		this.board_state[state_position]= 0;
+		document.getElementById("turn_info").innerHTML = "Turn for : " + "X".bold();
+	}
+
+	var length = 1;
+	var previous = this.board_state[0];
+	// After any move, the state of the table should be validated.
+	for (var i = 1; i < this.board_state.length; i++)
+	{
+		if (this.board_state[i] == previous && (this.board_state[i] == 1 || this.board_state[i] == 0))
+		{
+			length ++
+			if (length == 3)
+			{
+				// If the there is winner - Show it in an alert message
+				if (this.board_state[i] == 1)
+				{
+					alert("Winner is X");
+				}
+				else
+				{
+					alert("Winner is O");
+				}
+				// The game should reset itself once a winner is determined.
+				reset_play();
+				return;
+			}
+		}
+		else
+		{
+			length = 1;
+		}
+		previous = this.board_state[i];
+	}
+
+	toggle_move();
 }
 
 /*
