@@ -9,25 +9,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../resources/js/my_script.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="padding-left: 195px;">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="mypage_bootstrap.html">Home</a>
-          </li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="mypage_bootstrap.html">
+          <img class="rounded-circle" src="../resources/img/cu_boulder_logo.jpg" alt="" width="30" height="30">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="mypage_bootstrap.html">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../signup-modal/login.html">Sign Up Modal</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../tic-tac-toe/tic-tac-toe.html">Tic Tac Toe game</a>
+            </li>
+          </ul>
+        </div>
       </nav>
 
     <div id="mainContent" class = "main-content container">
-        <div id="hyperlinks">
-            <h6>Hyperlinks to all pages: (only for grading purposes)</h3>
-            <div class="Hyperlinks">
-                <a href="mypage.html">mypage</a>
-                <a href="mypage_bootstrap.html">mypage_bootstrap</a>
-                <a href="form.html">form</a>
-            </div>
-        </div>
         <h1 class="container">
             Palo, Alexander -
             <small style="color:gray">
@@ -45,7 +52,7 @@
             <h2>My Professional Profile</h2>
             <button class="btn btn-outline-secondary" href="https://github.com/alpa2120">Alex's Github</button>
         </div>
-        <img src="Resources/img/mainheadshot_done_linkedIn.jpg" class="rounded-circle" height="500px">
+        <img src="../resources/img/mainheadshot_done_linkedIn.jpg" class="rounded-circle" height="500px">
         <h3 style="padding-top: 40px;">My Favorite Projects</h3>
         <table class="table table-bordered" style="margin-bottom: 0;">
             <tr>
